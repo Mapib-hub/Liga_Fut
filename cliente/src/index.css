@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  background-color: #202020;
+  color: #37008f;
+}
+.equipo-fila:hover {
+  background-color: #f0f0f0; /* Un gris muy claro, puedes ajustarlo */
+  cursor: pointer; /* Opcional: Cambia el cursor para indicar que podría ser clickeable */
+}
+
+/* Opcional: Añadir una transición suave para que el cambio de color no sea brusco */
+.equipo-fila {
+  transition: background-color 0.2s ease-in-out;
+}

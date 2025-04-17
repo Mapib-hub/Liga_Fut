@@ -1,0 +1,14 @@
+# Cliente
+cliente/node_modules/
+cliente/dist/
+cliente/.env
+
+# Servidor
+servidor/node_modules/
+servidor/.env
+
+# Comunes
+respaldos
+.DS_Store
+*.log
+.env
