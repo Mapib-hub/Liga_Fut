@@ -5,7 +5,12 @@ export const getEquiposRequest = () => axios.get(`/api/equipos`);
 
 export const getEquipoRequest = (id) => axios.get(`/api/equipos/${id}`);
 
-export const createEquipoRequest = (equipoData) => {
+export const createEquipoRequest = (equipoData) => axios.post(`/api/equipos/`, equipoData);
+
+export const updateEquipoRequest = (id, equipoData) => 
+    axios.put(`/api/equipos/${id}`, equipoData);
+
+/*export const createEquipoRequest = (equipoData) => {
     // equipoData DEBE ser un objeto FormData
    // console.log("Llamando a createEquipoRequest con ruta /equipos"); // Log
     return axios.post(`/api/equipos`, equipoData, {
@@ -25,7 +30,7 @@ export const createEquipoRequest = (equipoData) => {
         'Content-Type': 'multipart/form-data' // <-- AÑADE ESTO
       }
     });
-  };
+  };*/
 
 export const deleteEquipoRequest = (id) => axios.delete(`/api/equipos/${id}`);
  

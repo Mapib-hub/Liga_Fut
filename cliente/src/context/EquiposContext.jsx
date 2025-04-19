@@ -36,27 +36,38 @@ export function EquiposProvider({ children }) {
   const createEquipo = async (equipo) => {
     try {
       const res = await createEquipoRequest(equipo);
-      getEquipos(); // Recargar la lista es más simple por ahora
-      return res.data; // Devuelve el equipo creado por si es útil
+      console.log("Equipo creado con éxito, llamando a getEquipos..."); // <-- LOG
+      getEquipos();
+      return res.data;
     } catch (error) {
-      console.error(error);
+      console.error("Error en createEquipo (Context):", error); // <-- LOG
       setErrors(error.response?.data?.message || ["Error creating equipo"]);
-      // Propagar el error para que el formulario sepa que falló
       throw error;
     }
   };
 
-  const deleteEquipo = async (id) => {
-    try {
-      const res = await deleteEquipoRequest(id);
-      if (res.status === 204 || res.status === 200) { // 204 No Content es común para DELETE exitoso
-        setEquipos(equipos.filter((equipo) => equipo._id !== id));
-      }
-    } catch (error) {
-      console.error(error);
-      setErrors(error.response?.data?.message || ["Error deleting equipo"]);
+  // En EquiposContext.jsx
+const deleteEquipo = async (id) => {
+  console.log("Intentando borrar equipo con ID (Context):", id); // <-- LOG
+  try {
+    const res = await deleteEquipoRequest(id);
+    console.log("Respuesta de deleteEquipoRequest:", res.status); // <-- LOG
+    if (res.status === 204 || res.status === 200) {
+      console.log("Borrando equipo del estado local..."); // <-- LOG
+      setEquipos(prevEquipos => { // Es mejor usar la forma funcional de setState
+          const nuevosEquipos = prevEquipos.filter((equipo) => equipo._id !== id);
+          console.log("Nuevo estado de equipos:", nuevosEquipos); // <-- LOG
+          return nuevosEquipos;
+      });
+    } else {
+       console.warn("Delete request no devolvió 204 o 200:", res.status); // <-- LOG
     }
-  };
+  } catch (error) {
+    console.error("Error en deleteEquipo (Context):", error); // <-- LOG
+    setErrors(error.response?.data?.message || ["Error deleting equipo"]);
+  }
+};
+
 
   const getEquipo = async (id) => {
     try {
@@ -71,11 +82,11 @@ export function EquiposProvider({ children }) {
   const updateEquipo = async (id, equipo) => {
     try {
       const res = await updateEquipoRequest(id, equipo);
-      // Actualizar el estado local o recargar
-      getEquipos(); // Recargar es más simple
+      console.log("Equipo actualizado con éxito, llamando a getEquipos..."); // <-- LOG
+      getEquipos();
       return res.data;
     } catch (error) {
-      console.error(error);
+      console.error("Error en updateEquipo (Context):", error); // <-- LOG
       setErrors(error.response?.data?.message || ["Error updating equipo"]);
       throw error;
     }

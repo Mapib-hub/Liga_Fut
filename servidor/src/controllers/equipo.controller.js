@@ -3,7 +3,6 @@ import path from 'path';                     // <--- AÑADE ESTA LÍNEA
 import fs from 'fs-extra';                 // <--- AÑADE ESTA LÍNEA (o 'fs/promises')
 import { fileURLToPath } from 'url';         // <--- AÑADE ESTA SI USAS __dirname con ES Modules
 
-// --- Necesario para obtener __dirname en ES Modules ---
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -12,6 +11,7 @@ export const getEquipos = async (req, res) => {
   try {
     const equip = await Equip.find();
     res.json(equip);
+    //console.log(equip);
   } catch (error) {
     console.log(error);
   }
@@ -73,10 +73,14 @@ export const getEqui = async (req, res) => {
 export const updateEquip = async (req, res) => {
     const { id } = req.params;
     const { nombre, description, estadio, fundado } = req.body;
+    console.log("--- Iniciando updateEquip ---");
+    console.log("ID:", id);
+    console.log("Body:", req.body); // ¿Llegan nombre, description, etc.?
+    console.log("File:", req.file); // ¿Se subió un archivo?
   
     try {
       const equipoToUpdate = await Equip.findById(id);
-  
+      console.log(equipoToUpdate);
       if (!equipoToUpdate) {
         // Si se subió un archivo pero el equipo no existe, borrar el archivo subido
         if (req.file) {
@@ -137,6 +141,7 @@ export const updateEquip = async (req, res) => {
   };
 
 export const deleteEquip = async (req, res ) =>{
+  console.log(req.params.id);
     try {
         const noti = await Equip.findByIdAndDelete(req.params.id);
     if(!noti) return res.status(404).json({message: "Equipo no encontrado"});

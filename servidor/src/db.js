@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 // 1. Lee la variable de entorno 'DATABASE_URL'.
 // 2. Si no existe, usa 'mongodb://localhost/prueba' como valor por defecto (para desarrollo local).
-const MONGO_URI = process.env.DATABASE_URL || "mongodb://localhost/liga_futdb";
+const MONGO_URI = process.env.DATABASE_URL ;
 
 export const conectDB = async () =>{
     try {

@@ -9,7 +9,7 @@
     
     # Instala todas las dependencias (incluyendo devDependencies para construir)
     RUN npm install
-    
+    COPY .env ./
     # Copia el resto del código fuente del cliente
     COPY . .
     

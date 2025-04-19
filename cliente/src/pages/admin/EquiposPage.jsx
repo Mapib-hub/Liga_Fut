@@ -30,6 +30,7 @@ function EquiposPage() {
   };
 
   const handleDelete = async (id) => {
+    console.log(id);
     Swal.fire({
       title: '¿Estás seguro de eliminar?',
       text: "¡No podrás revertir esto!",
