@@ -10,7 +10,7 @@ const instance = axios.create({
 });
 
 export default instance;
-
+ 
 // Luego, en tus componentes, importas esta instancia y haces llamadas relativas:
 // import apiClient from './api/axios';
 // apiClient.get('/tasks'); // Esto llamará a http://localhost:4000/api/tasks

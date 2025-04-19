@@ -1,19 +1,14 @@
 // c:\Users\Acer\Desktop\proyectos\prueba_node\cliente\src\pages\admin\NotisPage.jsx
 import { useEffect } from "react";
 import { useNotis } from "../../context/NotisContext.jsx";
-// import TaskCard from "../../components/TaskCard.jsx"; // No usado
 import TablaTask from "../../components/TablaTask.jsx";
 
 function NotisPage(){
-    // Obtén deleteNoti del contexto
     const { getNotis, notis, deleteNoti } = useNotis();
 
     useEffect(() =>{
         getNotis()
-    }, []);
-
-    // Mejor validación y mensaje
-    if (!notis || notis.length === 0) return (<h1>No hay Noticias</h1>);
+    }, []); // Se ejecuta al montar
 
     return (
         <div className="min-w-lg grid gap-4 row-span-3">
@@ -23,18 +18,29 @@ function NotisPage(){
                 <th>Titulo</th>
                 <th>Descripcion</th>
                 <th>Imagen </th>
-                <th>Acciones</th> {/* Cambiado th */}
+                <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-            {notis.map((task) =>(
-                // Pasa la función deleteNoti como prop onDelete
-                <TablaTask
-                    task={task}
-                    key={task._id}
-                    onDelete={deleteNoti} // <-- Aquí está la magia
-                />
-            ))}
+           
+            { Array.isArray(notis) && notis.length > 0 ? (
+                notis.map((task) =>(
+                    <TablaTask
+                        task={task}
+                        key={task._id}
+                        onDelete={deleteNoti}
+                    />
+                ))
+             ) : (
+                // Opcional: Muestra una fila indicando que no hay datos o está cargando
+                <tr>
+                    <td colSpan="4" className="text-center py-4">
+                        {/* Puedes diferenciar entre carga inicial y sin datos si tienes un estado de carga */}
+                        No hay noticias para mostrar.
+                    </td>
+                </tr>
+             )}
+            {/* --- FIN DE LA COMPROBACIÓN --- */}
             </tbody>
         </table>
         </div>

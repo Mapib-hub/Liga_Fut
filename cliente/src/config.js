@@ -1,20 +1,20 @@
 // src/config.js
 
-// Lee la variable de entorno definida en .env (asegúrate de que VITE_API_BASE_URL exista)
-const API_URL = import.meta.env.VITE_API_BASE_URL;
+// Lee la variable específica para el origen de las imágenes del backend
+const backendOriginUrl = import.meta.env.VITE_BACKEND_IMAGE_ORIGIN;
 
-// Calcula el origen (ej: http://localhost:4000)
-// Si API_URL no está definida, BACKEND_ORIGIN será una cadena vacía.
-// Podrías añadir un valor por defecto o un error si es crucial que siempre exista.
-export const BACKEND_ORIGIN = API_URL ? new URL(API_URL).origin : '';
+// Exporta directamente la URL leída del .env
+export const BACKEND_ORIGIN = backendOriginUrl || ''; // Usa un string vacío como fallback
 
-// Opcional: Puedes añadir una advertencia si la URL base no está configurada
+// Opcional: Puedes añadir una advertencia si la URL no está configurada
 if (!BACKEND_ORIGIN) {
   console.warn(
-    'Advertencia: VITE_API_BASE_URL no está definida en tu archivo .env. ' +
+    'Advertencia: VITE_BACKEND_IMAGE_ORIGIN no está definida en tu archivo .env. ' +
     'Las URLs de imágenes del backend pueden no funcionar correctamente.'
   );
 }
+
+// Ya no necesitamos leer VITE_API_BASE_URL aquí
 
 // Podrías exportar otras configuraciones globales aquí si las necesitas en el futuro
 // export const DEFAULT_PAGE_SIZE = 10;

@@ -36,8 +36,6 @@ export function EquiposProvider({ children }) {
   const createEquipo = async (equipo) => {
     try {
       const res = await createEquipoRequest(equipo);
-      // Podrías añadir el nuevo equipo al estado directamente o recargar la lista
-      // setEquipos([...equipos, res.data]);
       getEquipos(); // Recargar la lista es más simple por ahora
       return res.data; // Devuelve el equipo creado por si es útil
     } catch (error) {

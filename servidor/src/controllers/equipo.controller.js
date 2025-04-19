@@ -16,25 +16,48 @@ export const getEquipos = async (req, res) => {
     console.log(error);
   }
 };
+
 export const createEquip = async (req, res) => {
-    //console.log(req(File));
-    try {
-        const { nombre, description, foto_equipo, fundado, estadio } = req.body;
-        const newEqui = new Equip({
-            nombre,
-            description,
-            foto_equipo,
-            fundado,
-            estadio,
-            user: req.user.id,
-        });
-        const saveEqui = await newEqui.save();
-        res.json(saveEqui);
-    } catch (error) {
-        //console.log(error)
-        return res.status(500).json({ message: "Algo salio Mal" });
-    }
-}; 
+  try {
+      // Obtiene los campos de texto del body
+      const { nombre, description, fundado, estadio } = req.body;
+
+      // Obtiene el nombre del archivo subido por Multer, si existe
+      // Si no se subió archivo, puedes poner un valor por defecto o null
+      const foto_equipo = req.file ? req.file.filename : 'equipo.jpg'; // O null si prefieres
+
+      // Verifica si el usuario está autenticado (si es necesario)
+      if (!req.user || !req.user.id) {
+         // Si se subió un archivo pero el usuario no está autenticado, bórralo
+         if (req.file) {
+            try { await fs.unlink(req.file.path); } catch (e) { console.error("Error borrando archivo huérfano:", e); }
+         }
+         return res.status(401).json({ message: "No autorizado" });
+      }
+
+      const newEqui = new Equip({
+          nombre,
+          description,
+          foto_equipo: foto_equipo, // Usa el filename de Multer o el default
+          fundado,
+          estadio,
+          user: req.user.id, // Asegúrate que req.user.id viene de tu middleware authRequire
+      });
+
+      const saveEqui = await newEqui.save();
+      res.status(201).json(saveEqui); // Es bueno usar 201 para creación exitosa
+
+  } catch (error) {
+      // Si hubo un error al guardar en DB y se subió un archivo, intenta borrarlo
+      if (req.file) {
+         try { await fs.unlink(req.file.path); } catch (e) { console.error("Error borrando archivo tras error de guardado:", e); }
+      }
+      console.error("Error al crear equipo:", error); // Loguea el error real
+      return res.status(500).json({ message: "Algo salió mal al crear el equipo" });
+  }
+};
+
+// ... (resto de funciones) ...
 
 export const getEqui = async (req, res) => {
     try {
