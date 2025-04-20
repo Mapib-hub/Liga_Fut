@@ -24,9 +24,9 @@ services:
       context: ./cliente # Directorio donde está el Dockerfile del cliente
       dockerfile: Dockerfile # Nombre del Dockerfile (usualmente Dockerfile)
       # ---> PASO 3: Pasa el argumento de construcción aquí <---
-      #args:
+      args:
         # El nombre aquí debe coincidir con el ARG en el Dockerfile
-        #- VITE_API_BASE_URL_ARG=/api
+        - VITE_API_BASE_URL_ARG=/api
     ports:
       - "8081:80" # O el puerto que quieras exponer, ej 8080:80
     depends_on:
