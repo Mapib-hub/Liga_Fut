@@ -39,6 +39,5 @@ EXPOSE 4000
 # --- ¡CMD MODIFICADO! ---
 # Comando para iniciar la aplicación: ejecuta el script de espera,
 # pasándole el comando original ("node src/index.js") como argumentos.
-# CMD ["node", "src/index.js"] # <--- Comenta o elimina el CMD anterior
-CMD ["sleep", "infinity"]   
+CMD ["wait-for-mongo.sh", "node", "src/index.js"] 
 
