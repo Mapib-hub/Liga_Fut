@@ -1,0 +1,63 @@
+ # Usa una versión reciente
+
+services:
+  # Servicio del Backend (Node.js)
+  servidor:
+    build: ./servidor # Ruta al contexto de construcción (donde está el Dockerfile)
+    container_name: mi_app_backend
+    restart: unless-stopped
+    ports:
+      - "4000:4000" # Mapea puerto del host al contenedor (opcional si solo accedes via Nginx)
+    environment:
+      # Define las variables de entorno necesarias para el backend
+      DATABASE_URL: mongodb://mongo:27017/prueba # 'mongo' es el nombre del servicio de la DB
+      TOKEN_SECRET: "TU_SECRET_MUY_SEGURO_AQUI" # ¡Cambia esto por un secreto real!
+      FRONTEND_URL: "http://localhost" # O tu dominio/IP pública donde se accede al frontend
+      # NODE_ENV: production # Opcional: para que Express/Node optimicen
+    volumes:
+      # Monta un volumen para persistir los archivos subidos (si usas multer con 'uploads/')
+      - uploads:/usr/src/app/uploads
+      # En desarrollo, podrías montar el código fuente para live reload:
+      # - ./servidor:/usr/src/app
+      # - /usr/src/app/node_modules # Evita que node_modules local sobreescriba el del contenedor
+    depends_on:
+      - mongo # Asegura que la base de datos inicie antes que el backend
+    networks:
+      - app-network # Conecta este servicio a la red definida abajo
+
+  # Servicio del Frontend (React + Nginx)
+  cliente:
+    build: ./cliente # Ruta al contexto de construcción del cliente
+    container_name: mi_app_frontend
+    restart: unless-stopped
+    ports:
+      - "8081:80" # Mapea el puerto 80 del host al puerto 80 de Nginx
+      # Si usas HTTPS, mapearías el 443 también
+      # - "443:443"
+    depends_on:
+      - servidor # Depende del backend para las llamadas API
+    networks:
+      - app-network
+
+  # Servicio de la Base de Datos (MongoDB)
+  mongo:
+    image: mongo:latest # Usa la imagen oficial de MongoDB
+    container_name: mi_app_db
+    restart: unless-stopped
+    ports:
+      # Mapea el puerto de Mongo solo si necesitas acceder desde fuera de Docker (ej. para debug)
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db # Persiste los datos de la base de datos en un volumen nombrado
+    networks:
+      - app-network
+
+# Define los volúmenes nombrados
+volumes:
+  mongo-data: # Volumen para los datos de MongoDB
+  uploads:    # Volumen para los archivos subidos por Multer
+
+# Define la red personalizada para que los contenedores se comuniquen
+networks:
+  app-network:
+    driver: bridge # Usa el driver de red por defecto (bridge)

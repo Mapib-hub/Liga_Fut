@@ -9,19 +9,15 @@
     
     # Instala todas las dependencias (incluyendo devDependencies para construir)
     RUN npm install
-    #COPY .env ./
+    
     # Copia el resto del código fuente del cliente
     COPY . .
-     
+    
     # Construye la aplicación para producción
     # Si usas variables de entorno VITE_, puedes pasarlas aquí con ARG y --build-arg
-   # ... antes de RUN npm run build
-    ARG VITE_API_BASE_URL_ARG
-    ENV VITE_API_BASE_URL=$VITE_API_BASE_URL_ARG
-    ARG VITE_BACKEND_IMAGE_ORIGIN_ARG 
-    ENV VITE_BACKEND_IMAGE_ORIGIN=$VITE_BACKEND_IMAGE_ORIGIN_ARG 
+    # Ejemplo: ARG VITE_API_URL
+    # ENV VITE_API_URL=$VITE_API_URL
     RUN npm run build
-
     
     # --- Etapa 2: Producción (Production Stage) ---
     # Usa una imagen ligera de Nginx

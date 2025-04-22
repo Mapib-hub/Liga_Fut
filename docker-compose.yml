@@ -1,49 +1,48 @@
+# docker-compose.yml (Versión más limpia)
+version: '3.8'
 
 services:
   servidor:
     build: ./servidor
-    ports:
-      - "4000:4000"
     environment:
-      # Variables de runtime para el backend (conexión a DB, etc.)
-      DATABASE_URL: mongodb://mongo:27017/liga_docker
-      # ---> AGREGA ESTA LÍNEA <---
-      # Reemplaza <IP_DE_TU_OMV> con la IP real de tu servidor OMV
-      FRONTEND_URL: http://192.168.1.250:8081
-      # Otras variables como JWT_SECRET, etc. si las tienes
+      # --- Variables que SÍ dejamos ---
+      DATABASE_URL: mongodb://mongo:27017/liga_docker # Necesaria para conectar con Mongo dentro de Docker
+      PORT: 4000 # El puerto interno del servidor Node
+
+      # --- Variables que quitamos (se definirán en .env) ---
+      # FRONTEND_URL: http://localhost:8081 # <-- QUITADA (depende del entorno)
+      # TOKEN_SECRET: "TU_SECRETO_JWT_AQUI" # <-- QUITADA (es un secreto)
+      # Añade aquí cualquier OTRA variable que sea específica del entorno o secreta
     depends_on:
       - mongo
     networks:
       - app-network
     volumes:
-      - ./servidor:/app # Opcional para desarrollo, quitar en producción pura
-      - /app/node_modules # Para evitar sobreescribir node_modules
+      - ./servidor:/app
+      - /app/node_modules
 
   cliente:
     build:
-      context: ./cliente # Directorio donde está el Dockerfile del cliente
-      dockerfile: Dockerfile # Nombre del Dockerfile (usualmente Dockerfile)
-      # ---> PASO 3: Pasa el argumento de construcción aquí <---
+      context: ./cliente
+      dockerfile: Dockerfile
       args:
-        # El nombre aquí debe coincidir con el ARG en el Dockerfile
-      - VITE_API_BASE_URL_ARG=http://localhost:4000
-
+        # Estos son argumentos de BUILD, están bien aquí
+        VITE_API_BASE_URL_ARG: /api/
+        VITE_BACKEND_IMAGE_ORIGIN_ARG: "" # <-- Corregido a ""
     ports:
-      - "8081:80" # O el puerto que quieras exponer, ej 8080:80
+      - "8081:80"
     depends_on:
       - servidor
     networks:
       - app-network
-    # No necesitas 'volumes' para el cliente en producción,
-    # ya que Nginx sirve los archivos copiados durante el build.
 
   mongo:
-    image: mongo:4.4  
+    image: mongo:4.4
     volumes:
       - mongo-data:/data/db
     networks:
       - app-network
-    ports: 
+    ports:
       - "27017:27017"
 
 networks:

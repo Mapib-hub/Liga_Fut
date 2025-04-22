@@ -1,14 +1,23 @@
-# Cliente
-cliente/node_modules/
-cliente/dist/
-cliente/.env
+# .gitignore en la raíz (prueba_node/.gitignore)
 
-# Servidor
-servidor/node_modules/
-servidor/.env
-
-# Comunes
-respaldos
-.DS_Store
-*.log
+# Archivos de entorno - ¡MUY IMPORTANTE!
 .env
+.env.*
+!.env.example # Excepción para SÍ guardar el archivo de ejemplo
+
+# Dependencias
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Carpetas de Build/Distribución (ajusta si usas otros nombres)
+dist/
+build/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db

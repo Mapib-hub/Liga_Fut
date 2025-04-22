@@ -5,6 +5,7 @@ import ModalPartido from "../../components/ModalPartido.jsx";
 import Swal from "sweetalert2";
 import { useCalen } from "../../context/CalendarioContext.jsx";
 import ModalGoles from "../../components/ModalGoles.jsx";
+import { BACKEND_ORIGIN } from '../../config';
 
 function CalendarioPage() {
   const [load, setLoad] = useState(null);
@@ -94,14 +95,22 @@ function CalendarioPage() {
 
   const renderInsignia = (equipo) => {
     if (!equipo || !equipo.foto_equipo) return null;
+    // Usamos BACKEND_ORIGIN para construir la URL dinámicamente
+    const imageUrl = `${BACKEND_ORIGIN}/uploads/equipos/${equipo.foto_equipo}`;
+
     return (
         <img
             className="h-10 w-10 object-contain inline-block mr-2"
-            src={`http://localhost:4000/uploads/equipos/${equipo.foto_equipo}`}
+            src={imageUrl} // <-- Usamos la variable construida
             alt={equipo.nombre}
             style={{ verticalAlign: 'middle' }}
-            onError={(e) => e.target.style.display = 'none'}
+            onError={(e) => {
+                // Opcional: Puedes añadir un log o manejar el error de carga
+                console.error(`Error al cargar imagen: ${imageUrl}`);
+                e.target.style.display = 'none'; // Oculta si falla
+            }}
         />
+        // Quitamos el texto "BACKEND_ORIGIN" que se coló en tu copia anterior
     );
   };
 

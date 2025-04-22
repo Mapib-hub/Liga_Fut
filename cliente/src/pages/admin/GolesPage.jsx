@@ -145,15 +145,13 @@ function GolesPage() {
                 <tr key={jugador._id} className="bg-white border-b hover:bg-gray-50">
                   {/* Foto */}
                   <td className="px-6 py-4 elim400">
-                    {jugador.foto_jug && jugador.foto_jug !== 'player.jpg' ? (
+                 
                       <img
                         src={`${BACKEND_ORIGIN}/uploads/jugadores/${jugador.foto_jug}`}
                         alt={`${jugador.nombre} ${jugador.apellido}`}
                         className="h-10 w-10 object-cover rounded-full"
                       />
-                    ) : (
-                      <span className="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center text-xs text-gray-600">Sin Foto</span>
-                    )}
+                   
                   </td>
                   {/* Nombre y Apellido */}
                   <td className="px-6 py-4 font-medium text-gray-900">{jugador.nombre}</td>

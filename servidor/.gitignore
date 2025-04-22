@@ -1,0 +1,13 @@
+# servidor/.gitignore
+
+# Archivo de entorno específico del servidor (si lo usaras directamente)
+.env
+.env.*
+!.env.example
+
+# Dependencias
+node_modules/
+
+# Otros
+.DS_Store
+*.log

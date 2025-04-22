@@ -5,7 +5,7 @@ FROM node:18-alpine AS base
 
 # Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
-
+ 
 # Copiar solo los archivos de manifiesto primero para aprovechar el caché de Docker
 COPY package.json package-lock.json* ./
 
