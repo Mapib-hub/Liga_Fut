@@ -1,57 +1,114 @@
 // src/components/Sidebar.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
+// --- CORRECCIÓN: Importar useLocation ---
+import { Link, useLocation } from 'react-router-dom';
 
-// Recibe isOpen y toggleSidebar como props
+// Asume que recibe isOpen y toggleSidebar
 function Sidebar({ isOpen, toggleSidebar }) {
+  // --- CORRECCIÓN: Obtener la ubicación actual ---
+  const location = useLocation();
+
+  // --- CORRECCIÓN: Definir la función isActive ---
+  const isActive = (path) => location.pathname === path;
+
   return (
-    // Clases base + transiciones + posicionamiento móvil + posicionamiento desktop
     <aside
       className={`
-        fixed inset-y-0 left-0 z-40 w-64 bg-gray-800 text-white p-4 flex flex-col
+        fixed inset-y-0 left-0 z-40 w-64
+        bg-gray-800 text-white p-4
         transform transition-transform duration-300 ease-in-out
-        ${isOpen ? 'translate-x-0' : '-translate-x-full'} // Controla visibilidad en móvil
-        md:relative md:translate-x-0 md:z-auto // Resetea para desktop
+        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+        bp880:relative
+        bp880:translate-x-0
+        bp880:z-auto
+        bp880:flex-shrink-0
+        bp880:block
       `}
     >
-      {/* Botón opcional para cerrar desde dentro del sidebar en móvil */}
-      <button onClick={toggleSidebar} className="absolute top-2 right-2 text-white md:hidden">
+      {/* Botón para cerrar en móvil */}
+      <button
+        onClick={toggleSidebar}
+        className="absolute top-2 right-2 p-1 text-gray-400 hover:text-white bp880:hidden"
+        aria-label="Cerrar menú"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
 
-      <h2 className="text-xl font-semibold mb-6 mt-8 md:mt-0">Admin Liga</h2> {/* Añadido margen superior para móvil */}
-      <nav className="flex-1"> {/* Añadido flex-1 para que la nav ocupe espacio */}
+      {/* Contenido del Sidebar */}
+      <div className="mb-8 mt-8 bp880:mt-0">
+        <h2 className="text-2xl font-semibold text-center">Tu Logo</h2>
+      </div>
+      <nav>
         <ul>
-          {/* --- Enlaces --- (Añadir onClick={toggleSidebar} a cada Link para cerrar al navegar en móvil) */}
-          <li className="mb-2">
-            <Link to="/admin/dashboard" onClick={toggleSidebar} className="hover:bg-gray-700 p-2 block rounded">Dashboard</Link>
+          {/* --- Ahora isActive está definida y funcionará --- */}
+          <li>
+            <Link
+              to="/admin"
+              className={`block px-4 py-2 rounded hover:bg-gray-700 ${isActive('/admin') ? 'bg-gray-700 font-semibold' : ''}`}
+              onClick={isOpen ? toggleSidebar : undefined} // Cierra sidebar en móvil al hacer clic
+            >
+              📊 Dashboard
+            </Link>
           </li>
-          <li className="mb-2">
-            <Link to="/admin/jugadores" onClick={toggleSidebar} className="hover:bg-gray-700 p-2 block rounded">Jugadores</Link>
+          <li>
+            <Link
+              to="/admin/noticias"
+              className={`block px-4 py-2 rounded hover:bg-gray-700 ${isActive('/admin/noticias') ? 'bg-gray-700 font-semibold' : ''}`}
+              onClick={isOpen ? toggleSidebar : undefined}
+            >
+              📰 Noticias
+            </Link>
           </li>
-          <li className="mb-2">
-            <Link to="/admin/equipos" onClick={toggleSidebar} className="hover:bg-gray-700 p-2 block rounded">Equipos</Link>
+          <li>
+            <Link
+              to="/admin/fechas"
+              className={`block px-4 py-2 rounded hover:bg-gray-700 ${isActive('/admin/fechas') ? 'bg-gray-700 font-semibold' : ''}`}
+              onClick={isOpen ? toggleSidebar : undefined}
+            >
+              🗓️ Fechas
+            </Link>
           </li>
-          <li className="mb-2">
-            <Link to="/admin/noticias" onClick={toggleSidebar} className="hover:bg-gray-700 p-2 block rounded">Noticias</Link>
+          <li>
+            <Link
+              to="/admin/fixture" // Asumiendo que esta es la ruta del calendario
+              className={`block px-4 py-2 rounded hover:bg-gray-700 ${isActive('/admin/fixture') ? 'bg-gray-700 font-semibold' : ''}`}
+              onClick={isOpen ? toggleSidebar : undefined}
+            >
+              📅 Calendario
+            </Link>
           </li>
-          <li className="mb-2">
-            <Link to="/admin/jornadas" onClick={toggleSidebar} className="hover:bg-gray-700 p-2 block rounded">Jornadas</Link>
+          <li>
+            <Link
+              to="/admin/equipos"
+              className={`block px-4 py-2 rounded hover:bg-gray-700 ${isActive('/admin/equipos') ? 'bg-gray-700 font-semibold' : ''}`}
+              onClick={isOpen ? toggleSidebar : undefined}
+            >
+              🛡️ Equipos
+            </Link>
           </li>
-          <li className="mb-2">
-            <Link to="/tasks" onClick={toggleSidebar} className="hover:bg-gray-700 p-2 block rounded">Tasks (Ejemplo)</Link>
+          <li>
+            <Link
+              to="/admin/jugadores"
+              className={`block px-4 py-2 rounded hover:bg-gray-700 ${isActive('/admin/jugadores') ? 'bg-gray-700 font-semibold' : ''}`}
+              onClick={isOpen ? toggleSidebar : undefined}
+            >
+              👥 Jugadores
+            </Link>
           </li>
-           <li className="mb-2">
-            <Link to="/profile" onClick={toggleSidebar} className="hover:bg-gray-700 p-2 block rounded">Perfil (Ejemplo)</Link>
+          <li>
+            <Link
+              to="/admin/goles"
+              className={`block px-4 py-2 rounded hover:bg-gray-700 ${isActive('/admin/goles') ? 'bg-gray-700 font-semibold' : ''}`}
+              onClick={isOpen ? toggleSidebar : undefined}
+            >
+              ⭐ Sumar Goles
+            </Link>
           </li>
+          {/* Añade más links aquí */}
         </ul>
       </nav>
-      {/* Puedes añadir más cosas al sidebar si es necesario */}
-      <div className="mt-auto">
-         {/* Info usuario o logout */}
-      </div>
     </aside>
   );
 }

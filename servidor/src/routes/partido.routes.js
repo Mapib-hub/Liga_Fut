@@ -27,5 +27,4 @@ router.put("/goles_partido/:id", actualizarGoles);
 // Eliminar un partido
 router.delete("/partidos/:id", eliminarPartido);
 
-
 export default router;

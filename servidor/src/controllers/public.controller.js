@@ -166,8 +166,8 @@ export const obtenerFecha = async (req, res) => {
 export const obtenerPartidos = async (req, res) => {
   try {
     const partidos = await Partido.find()
-      .populate("equipo_local", "nombre") // Solo trae el campo "nombre" del equipo local
-      .populate("equipo_visitante", "nombre") // Solo trae el campo "nombre" del equipo visitante
+      .populate("equipo_local", "nombre foto_equipo") // Solo trae el campo "nombre" del equipo local
+      .populate("equipo_visitante", "nombre foto_equipo") // Solo trae el campo "nombre" del equipo visitante
       .populate("fecha", "nombre fecha");
     res.status(200).json(partidos);
   } catch (error) {

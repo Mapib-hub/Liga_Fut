@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 
 // Configuración de almacenamiento para multer
 const storage = multer.diskStorage({
-    destination: path.join(__dirname, '../uploads/noticias'),
+    destination: path.join(__dirname, '../../uploads/noticias'),
     filename: function (req, file, cb) {
       cb(null, `${Date.now()}${path.extname(file.originalname)}`);
   }

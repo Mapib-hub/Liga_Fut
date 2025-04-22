@@ -3,8 +3,7 @@ import Equip from "../models/equipos.model.js";
 import { authRequire } from "../middleware/validateToken.js";
 import { validateSchema } from "../middleware/validator.middleware.js";
 import { createEquipoShema } from "../schemas/equipo.schema.js";
-import { createEquip, getEquipos, updateEquip, getEqui, deleteEquip } from "../controllers/equipo.controller.js";
-
+import { createEquip, getEquipos, updateEquip, getEqui, deleteEquip } from "../controllers/equipo.controller.js"
 import {upload} from '../middleware/multerConfig.js'; // TU CONFIG DE MULTER
 
 

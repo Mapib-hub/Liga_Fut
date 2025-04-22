@@ -24,9 +24,8 @@ export function NotiProvider( { children } ){
     // --- getTasks CORREGIDO ---
     const getNotis = async () => {
         try {
-            console.log("Llamando a getTasksRequest..."); // Log
             const res = await getNotisRequest();
-            console.log("Respuesta de getTasksRequest:", res.data); // Log
+           // console.log("Respuesta de getTasksRequest:", res.data); // Log
 
             // Verifica si la respuesta es un array
             if (Array.isArray(res.data)) {
@@ -90,7 +89,7 @@ export function NotiProvider( { children } ){
     const updateNoti = async (id, task) => {
         try {
             const res = await updateNotiRequest(id, task);
-            console.log("Tarea actualizada:", res.data);
+           // console.log("Tarea actualizada:", res.data);
             // Actualiza el estado localmente para reflejar el cambio
             setNotis(prevTasks => prevTasks.map(t =>
                 t._id === id ? { ...t, ...res.data } : t // Asume que res.data contiene la tarea actualizada

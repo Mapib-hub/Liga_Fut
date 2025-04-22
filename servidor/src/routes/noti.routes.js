@@ -7,7 +7,6 @@ import { upload } from "../middleware/multerNoti.js";
  // Asegúrate de que el nombre del campo es 'imagen'
  import multer from "multer";
 
-
 const router = Router();
 
 router.get('/notis', authRequire, getNotis);
