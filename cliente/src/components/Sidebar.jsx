@@ -106,6 +106,15 @@ function Sidebar({ isOpen, toggleSidebar }) {
               ⭐ Sumar Goles
             </Link>
           </li>
+          <li>
+            <Link
+              to="/admin/alert" // Ruta para la página de gestión de alertas
+              className={`block px-4 py-2 rounded hover:bg-gray-700 ${isActive('/admin/alert') ? 'bg-gray-700 font-semibold' : ''}`}
+              onClick={isOpen ? toggleSidebar : undefined}
+            >
+              🔔 Gestionar Alerta {/* Icono y texto del enlace */}
+            </Link>
+          </li>
           {/* Añade más links aquí */}
         </ul>
       </nav>

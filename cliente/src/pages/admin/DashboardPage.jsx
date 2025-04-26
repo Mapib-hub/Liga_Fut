@@ -150,7 +150,7 @@ const GoleadoresWidget = ({ jugadores }) => {
   }, [jugadores]);
 
   const renderFoto = (jugador) => {
-    if (!jugador || !jugador.foto_jug || jugador.foto_jug === 'player.jpg') return <div className="h-8 w-8 bg-gray-300 rounded-full"></div>;
+    if (!jugador || !jugador.foto_jug ) return <div className="h-8 w-8 bg-gray-300 rounded-full"></div>;
     return (
         <img
             className="h-8 w-8 object-cover rounded-full"

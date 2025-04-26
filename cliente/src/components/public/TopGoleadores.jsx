@@ -5,7 +5,7 @@ import { BACKEND_ORIGIN } from '../../config';
 
 function TopGoleadores({ jugadores }) {
   const [topGoleadores, setTopGoleadores] = useState([]);
-
+ ///console.log("Jugadores (prop):", jugadores);
   useEffect(() => {
     if (jugadores) {
       const sorted = [...jugadores]
@@ -15,24 +15,27 @@ function TopGoleadores({ jugadores }) {
     }
   }, [jugadores]);
 
-  const renderFoto = (jugador) => {
-    if (!jugador || !jugador.foto_jug || jugador.foto_jug === 'player.jpg') {
-      // Placeholder si no hay foto o es la default
-      return (
-        <div className="h-10 w-10 bg-gray-300 rounded-full flex items-center justify-center text-gray-500 text-xl font-semibold flex-shrink-0">
-          {jugador.nombre ? jugador.nombre[0].toUpperCase() : '?'}
-        </div>
-      );
-    }
+  // Dentro de TopGoleadores.jsx
+
+const renderFoto = (jugador) => {
+  if (!jugador || !jugador.foto_jug) {
     return (
-      <img
-        className="h-10 w-10 object-cover rounded-full flex-shrink-0"
-        src={`${BACKEND_ORIGIN}/uploads/jugadores/${jugador.foto_jug}`}
-        alt={`${jugador.nombre} ${jugador.apellido}`}
-        onError={(e) => e.target.style.display = 'none'}
-      />
+      <div className="h-10 w-10 bg-gray-300 rounded-full flex items-center justify-center text-gray-500 text-xl font-semibold flex-shrink-0">
+        {jugador && jugador.nombre ? jugador.nombre[0].toUpperCase() : '?'}
+      </div>
     );
-  };
+  }
+  return (
+    <img
+      className="h-10 w-10 object-cover rounded-full flex-shrink-0"
+      src={`${BACKEND_ORIGIN}/uploads/jugadores/${jugador.foto_jug}`}
+      alt={`${jugador.nombre} ${jugador.apellido}`}
+      onError={(e) => e.target.style.display = 'none'}
+    />
+  );
+};
+
+// ... resto del componente TopGoleadores ...
 
   const renderInsigniaEquipo = (equipo) => {
     if (!equipo || !equipo.foto_equipo) return null;

@@ -3,15 +3,15 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
 // --- Importaciones Públicas ---
-import HomePage from './pages/HomePage'; // Solo una importación
-//import NoticiasListPage from './pages/NoticiasListPage'; // Placeholder
-//import NoticiaDetailPage from './pages/NoticiaDetailPage'; // Placeholder
-//import TablaPage from './pages/TablaPage'; // Placeholder
-//import CalendarioPublicPage from './pages/CalendarioPublicPage'; // Placeholder
-//import EquiposPublicPage from './pages/EquiposPublicPage'; // Placeholder
-//import EquipoDetailPage from './pages/EquipoDetailPage'; // Placeholder
-//import EstadisticasPage from './pages/EstadisticasPage'; // Placeholder
-//import JugadorDetailPage from './pages/JugadorDetailPage'; // Placeholder
+import HomePage from './pages/HomePage'; import PublicLayout from "./components/public/PublicLayout.jsx";
+import EquiposWebPage from './pages/EquiposWebPage'; // 
+import GoleadoresPage from './pages/GoleadoresPage'; 
+import EquipoDetallePage from './pages/EquipoDetallePage';
+import JugadorDetallePage from './pages/JugadorDetallePage';
+import TablaPosicionesPage from './pages/TablaPosicionesPage';
+import NoticiasListPage from './pages/NoticiasListPage';
+import NoticiaDetallePage from './pages/NoticiaDetallePage';
+
 import LoginPage from "./pages/LoginPage";
 import ImagenPage from "./pages/ImagenPage"; // ¿Es pública o admin? La dejo aquí por ahora.
 
@@ -27,20 +27,21 @@ import NoticiasPage from "./pages/admin/NoticiasPage.jsx"; // Solo una importaci
 import JugadoresPage from "./pages/admin/JugadoresPage.jsx";
 import GolesPage from "./pages/admin/GolesPage.jsx";
 import DashboardPage from "./pages/admin/DashboardPage";
-// import Fixture from "./pages/admin/FechasCalendario"; // Comentado si no se usa
+import AlertManagementPage from "./pages/admin/AlertManagementPage";
 
 // --- Layouts y Protección ---
 import ProtectedRoute from "./ProtectedRoute";
 import ProtectedLayout from "./components/ProtectedLayout";
 
 // --- Contextos ---
-import { TaskProvider } from "./context/TasksContext";
+//import { TaskProvider } from "./context/TasksContext";
 import { NotiProvider } from "./context/NotisContext";
 import { EquiposProvider } from "./context/EquiposContext";
 import { CalendarProvider } from "./context/CalendarioContext.jsx"; // Renombrado para claridad
 import { FechasProvider } from "./context/FechaContext";
 import { JugaProvider } from "./context/JugadorContext";
-
+import { AlertProvider } from "./context/AlertContext.jsx";
+import { PublicProvider } from "./context/PublicContex.jsx";
 function App() {
   // Verificar si CalendarProvider y CalenProvider son lo mismo
   // Si son lo mismo, usa solo uno. Si son diferentes, asegúrate que ambos sean necesarios.
@@ -48,26 +49,36 @@ function App() {
 
   return (
     <AuthProvider>
-      <TaskProvider>
+      <AlertProvider>
         <NotiProvider>
           <EquiposProvider>
             <CalendarProvider> 
               <FechasProvider>
                 <JugaProvider>
+                  <PublicProvider>
                   {/* <CalenProvider> Si es diferente, descomenta y envuelve aquí </CalenProvider> */}
                   <BrowserRouter>
                     <Routes>
+                      <Route path="/login" element={<LoginPage />} />
                       {/* --- RUTAS PÚBLICAS --- */}
+                      <Route element={<PublicLayout />}> {/* <-- Ruta Padre para Layout Público */}
                       <Route path="/" element={<HomePage />} />
+                      <Route path="/web/equipos" element={<EquiposWebPage />} />
+                      <Route path="/web/equipos/:id" element={<EquipoDetallePage />} />
+                      <Route path="/web/goleadores" element={<GoleadoresPage />} />
+                      <Route path="/web/jugadores/:id" element={<JugadorDetallePage />} />
+                      <Route path="/web/tabla" element={<TablaPosicionesPage />} />
+                      <Route path="/web/noticias" element={<NoticiasListPage />} />
+                      <Route path="/web/noticias/:id" element={<NoticiaDetallePage />} />
                       
                       <Route path="/imagenes" element={<ImagenPage />} />
-                      <Route path="/login" element={<LoginPage />} />
                       <Route path="/register" element={<RegisterPage />} />
-
+                      </Route>
                       {/* --- Rutas Protegidas (Admin) --- */}
                       <Route element={<ProtectedRoute />}>
                         <Route element={<ProtectedLayout />}>
                           <Route path="/admin" element={<DashboardPage />} />
+                          <Route path="/admin/alert" element={<AlertManagementPage />} />
                           <Route path="/admin/noticias" element={<NoticiasPage />} /> {/* Ruta única */}
                           <Route path="/tasks" element={<TasksPage />} /> {/* ¿Debería ser /admin/tasks? */}
                           <Route path="/add-tasks" element={<TaskFormPage />} /> {/* ¿Debería ser /admin/add-task? */}
@@ -89,12 +100,13 @@ function App() {
                       </Route>
                     </Routes>
                   </BrowserRouter>
+                   </PublicProvider>
                 </JugaProvider>
               </FechasProvider>
             </CalendarProvider>
           </EquiposProvider>
         </NotiProvider>
-      </TaskProvider>
+      </AlertProvider>
     </AuthProvider>
   );
 }

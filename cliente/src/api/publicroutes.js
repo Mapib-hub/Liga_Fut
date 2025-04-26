@@ -8,7 +8,9 @@ export const getCarruselPublic = () => axios.get(`/carrusel/`);
 
 export const getNoticiasPublic_3 = () => axios.get(`/notis_3/`);
 
-export const getJugadoresRequest = () => axios.get(`/jugadores`); 
+export const getJugadoresRequest = (params = {}) => axios.get(`/jugadores`, { params });
+
+export const getGoleadoresPublic = () => axios.get(`/goleadores`);
 
 export const getJugadorRequest = (id) => axios.get(`/jugadores/${id}`);
 
@@ -23,6 +25,9 @@ export const getFechaRequest = (id) => axios.get(`/fechas/${id}`);
 export const getCalendarioRequest = () => axios.get(`/partidos`);
 
 export const getPartidoRequest = (id) => axios.get(`/partidos/${id}`);
+
+export const getAlertStatus = () => axios.get(`/alert`);
+
 
 
 
