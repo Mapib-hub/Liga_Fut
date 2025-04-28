@@ -23,9 +23,9 @@ function AlertBanner({ message, type = 'info' }) {
       IconComponent = FaExclamationTriangle; // Icono de advertencia
       break;
     case 'error':
-      bgColor = 'bg-red-100';           // Fondo rojo pálido
+      bgColor = 'bg-red-700';           // Fondo rojo pálido
       borderColor = 'border-red-400';     // Borde izquierdo rojo más oscuro
-      textColor = 'text-red-700';         // Texto rojo oscuro
+      textColor = 'text-red-200';         // Texto rojo oscuro
       IconComponent = FaTimesCircle;      // Icono de error/cruz
       break;
     case 'info':

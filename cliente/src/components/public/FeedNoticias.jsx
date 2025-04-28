@@ -18,13 +18,13 @@ function FeedNoticias({ noticias }) {
     <div className="bg-white rounded-lg shadow p-4 md:p-6">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-xl font-semibold text-gray-800">Más Noticias</h3>
-        <Link to="/noticias" className="text-blue-600 hover:text-blue-800 text-sm font-semibold">
+        <Link to="/web/noticias" className="text-blue-600 hover:text-blue-800 text-sm font-semibold">
           Ver Todas →
         </Link>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {noticias.map((noti) => (
-          <Link to={`/noticias/${noti._id}`} key={noti._id} className="group block bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow duration-200">
+          <Link to={`/web/noticias/${noti._id}`} key={noti._id} className="group block bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow duration-200">
             <div className="h-40 overflow-hidden">
               <img
                 src={`${BACKEND_ORIGIN}/uploads/noticias/${noti.foto_noti}`}

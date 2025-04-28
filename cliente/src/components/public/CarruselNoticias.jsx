@@ -48,7 +48,7 @@ function CarruselNoticias({ noticias }) {
                 {noti.description.length > 150 ? `${noti.description.substring(0, 150)}...` : noti.description}
               </p>
               <Link
-                to={`/noticias/${noti._id}`} // Asume ruta /noticias/:id para el detalle
+                to={`/web/noticias/${noti._id}`} // Asume ruta /noticias/:id para el detalle
                 className="mt-3 inline-block bg-blue-600 hover:bg-blue-700 text-white text-xs md:text-sm font-semibold py-2 px-4 rounded transition duration-200"
               >
                 Leer Más

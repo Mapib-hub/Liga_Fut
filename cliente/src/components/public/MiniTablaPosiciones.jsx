@@ -55,7 +55,7 @@ function MiniTablaPosiciones({ equipos }) {
                   <td className="py-2 px-1 font-semibold">{index + 1}</td>
                   <td className="py-2 px-1 flex items-center">
                     {renderInsignia(equipo)}
-                    <Link to={`/equipos/${equipo._id}`} className="hover:text-blue-600 truncate font-medium">
+                    <Link to={`/web/equipos/${equipo._id}`} className="hover:text-blue-600 truncate font-medium">
                       {equipo.nombre}
                     </Link>
                   </td>
@@ -67,7 +67,7 @@ function MiniTablaPosiciones({ equipos }) {
             </tbody>
           </table>
           <div className="text-right mt-3">
-            <Link to="/tabla" className="text-blue-600 hover:text-blue-800 text-xs font-semibold">
+            <Link to="/web/tabla" className="text-blue-600 hover:text-blue-800 text-xs font-semibold">
               Ver Tabla Completa →
             </Link>
           </div>

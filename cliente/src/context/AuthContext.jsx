@@ -47,7 +47,7 @@ export const AuthProvider = ({children})=> {
     const sigin = async (user) => {
         try {
             const res = await loginRequest(user);
-            console.log("Login exitoso:", res.data); // Log de éxito
+            //console.log("Login exitoso:", res.data); // Log de éxito
             setIsAuthenticated(true);
             setUser(res.data);
             setErrors([]); // Limpia errores al hacer login exitoso

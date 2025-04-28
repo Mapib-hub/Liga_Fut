@@ -11,6 +11,8 @@ import JugadorDetallePage from './pages/JugadorDetallePage';
 import TablaPosicionesPage from './pages/TablaPosicionesPage';
 import NoticiasListPage from './pages/NoticiasListPage';
 import NoticiaDetallePage from './pages/NoticiaDetallePage';
+import FixturePage from './pages/FixturePage'; 
+import NotFoundPage from './pages/NotFoundPage';
 
 import LoginPage from "./pages/LoginPage";
 import ImagenPage from "./pages/ImagenPage"; // ¿Es pública o admin? La dejo aquí por ahora.
@@ -28,6 +30,7 @@ import JugadoresPage from "./pages/admin/JugadoresPage.jsx";
 import GolesPage from "./pages/admin/GolesPage.jsx";
 import DashboardPage from "./pages/admin/DashboardPage";
 import AlertManagementPage from "./pages/admin/AlertManagementPage";
+import NotFoundAdmin from "./pages/admin/NotFoundAdmin";
 
 // --- Layouts y Protección ---
 import ProtectedRoute from "./ProtectedRoute";
@@ -63,6 +66,8 @@ function App() {
                       {/* --- RUTAS PÚBLICAS --- */}
                       <Route element={<PublicLayout />}> {/* <-- Ruta Padre para Layout Público */}
                       <Route path="/" element={<HomePage />} />
+                      <Route path="/*" element={<NotFoundPage />} />
+                      <Route path="/web/*" element={<NotFoundPage />} />
                       <Route path="/web/equipos" element={<EquiposWebPage />} />
                       <Route path="/web/equipos/:id" element={<EquipoDetallePage />} />
                       <Route path="/web/goleadores" element={<GoleadoresPage />} />
@@ -70,6 +75,7 @@ function App() {
                       <Route path="/web/tabla" element={<TablaPosicionesPage />} />
                       <Route path="/web/noticias" element={<NoticiasListPage />} />
                       <Route path="/web/noticias/:id" element={<NoticiaDetallePage />} />
+                      <Route path="/web/fixture" element={<FixturePage />} />
                       
                       <Route path="/imagenes" element={<ImagenPage />} />
                       <Route path="/register" element={<RegisterPage />} />
@@ -78,6 +84,7 @@ function App() {
                       <Route element={<ProtectedRoute />}>
                         <Route element={<ProtectedLayout />}>
                           <Route path="/admin" element={<DashboardPage />} />
+                          <Route path="/admin/*" element={<NotFoundAdmin />} />
                           <Route path="/admin/alert" element={<AlertManagementPage />} />
                           <Route path="/admin/noticias" element={<NoticiasPage />} /> {/* Ruta única */}
                           <Route path="/tasks" element={<TasksPage />} /> {/* ¿Debería ser /admin/tasks? */}
@@ -92,10 +99,8 @@ function App() {
                           <Route path="/admin/goles" element={<GolesPage />} />
                           <Route path="/admin/equipos" element={<EquiposPage />} />
                           {/* Eliminadas rutas duplicadas de equipos */}
-                          {/* <Route path="/admin/add-equipo" element={<EquiposPage />} /> */}
-                          {/* <Route path="/admin/equipos/:id" element={<EquiposPage />} /> */}
-                          {/* Si necesitas una ruta específica para editar/añadir equipo, debería apuntar a un componente de formulario */}
-
+                          <Route path="*" element={<NotFoundPage />} />
+                          
                         </Route>
                       </Route>
                     </Routes>

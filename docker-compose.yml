@@ -1,6 +1,6 @@
 # docker-compose.yml (Versión más limpia)
 version: '3.8'
-
+ 
 services:
   servidor:
     build: ./servidor
@@ -20,15 +20,18 @@ services:
     volumes:
       #- ./servidor:/app
       - /app/node_modules
-
+ 
   cliente:
     build:
       context: ./cliente
       dockerfile: Dockerfile
       args:
-        # Estos son argumentos de BUILD, están bien aquí
+        # --- CORREGIDO ---
+        # Pasa la URL completa del backend dentro de la red Docker
         VITE_API_BASE_URL_ARG: /api/
-        VITE_BACKEND_IMAGE_ORIGIN_ARG: "" # <-- Corregido a ""
+        # Pasa el origen completo del backend para las imágenes
+        VITE_BACKEND_IMAGE_ORIGIN_ARG: ""
+        # --- FIN CORRECCIÓN ---
     ports:
       - "8081:80"
     depends_on:

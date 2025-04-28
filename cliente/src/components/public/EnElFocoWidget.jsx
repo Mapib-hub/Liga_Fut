@@ -135,7 +135,7 @@ function EnElFocoWidget({ partidos: rondas }) {
 
         {/* Link a Calendario */}
         <div className="text-center mt-4">
-          <Link to="/web/calendario" className="text-blue-600 hover:text-blue-800 text-xs font-semibold">
+          <Link to="/web/fixture" className="text-blue-600 hover:text-blue-800 text-xs font-semibold">
             Ver Calendario Completo →
           </Link>
         </div>

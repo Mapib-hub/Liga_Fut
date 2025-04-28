@@ -35,7 +35,7 @@ RUN apk add --no-cache netcat-openbsd && chmod +x /usr/local/bin/wait-for-mongo.
 
 # Exponer el puerto en el que corre tu aplicación backend
 EXPOSE 4000
-
+ 
 # --- ¡CMD MODIFICADO! ---
 # Comando para iniciar la aplicación: ejecuta el script de espera,
 # pasándole el comando original ("node src/index.js") como argumentos.
@@ -43,5 +43,5 @@ EXPOSE 4000
 # Comando para iniciar la aplicación: ejecuta el script de espera,
 # pasándole el comando original ("node src/index.js") como argumentos.
 CMD wait-for-mongo.sh node src/index.js
-
+ 
 

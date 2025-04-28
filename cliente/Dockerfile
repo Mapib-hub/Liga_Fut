@@ -3,7 +3,7 @@
 
     # Establece el directorio de trabajo
     WORKDIR /app
-    
+     
     # Copia package.json y package-lock.json (o yarn.lock)
     COPY package*.json ./
     
@@ -12,7 +12,7 @@
     #COPY .env ./
     # Copia el resto del código fuente del cliente
     COPY . .
-     
+      
     # Construye la aplicación para producción
     # Si usas variables de entorno VITE_, puedes pasarlas aquí con ARG y --build-arg
    # ... antes de RUN npm run build

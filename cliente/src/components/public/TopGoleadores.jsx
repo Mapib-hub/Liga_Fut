@@ -61,7 +61,7 @@ const renderFoto = (jugador) => {
                 <span className="font-semibold w-5 text-gray-500">{index + 1}.</span>
                 {renderFoto(jugador)}
                 <div className="overflow-hidden">
-                  <Link to={`/jugadores/${jugador._id}`} className="font-medium text-gray-800 hover:text-blue-600 block truncate">
+                  <Link to={`/web/jugadores/${jugador._id}`} className="font-medium text-gray-800 hover:text-blue-600 block truncate">
                     {jugador.nombre} {jugador.apellido}
                   </Link>
                   <span className="text-xs text-gray-500 block">
@@ -73,7 +73,7 @@ const renderFoto = (jugador) => {
             </li>
           ))}
           <li className="pt-2 text-right">
-            <Link to="/estadisticas" className="text-blue-600 hover:text-blue-800 text-xs font-semibold">
+            <Link to="/web/goleadores" className="text-blue-600 hover:text-blue-800 text-xs font-semibold">
               Ver Ranking Completo →
             </Link>
           </li>

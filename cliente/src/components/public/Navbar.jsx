@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiHome, FiList, FiRss, FiUsers, FiBarChart2, FiLogIn, FiMenu, FiX, FiAward } from 'react-icons/fi';
+import { FiHome, FiList, FiRss, FiUsers, FiCalendar, FiLogIn, FiMenu, FiX, FiAward } from 'react-icons/fi';
 
 const navItems = [
   { to: "/", icon: FiHome, text: "Inicio" },
+  { to: "/web/fixture", icon: FiCalendar, text: "Fixture" },
   { to: "/web/tabla", icon: FiList, text: "Tabla Posiciones" },
   { to: "/web/noticias", icon: FiRss, text: "Noticias" },
   { to: "/web/equipos", icon: FiUsers, text: "Equipos" },
