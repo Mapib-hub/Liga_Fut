@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: 'http://localhost:4000/public',
-    //baseURL: '/public',
+    //baseURL: 'http://localhost:4000/public',
+    baseURL: '/public',
     withCredentials: true,
 });
 
