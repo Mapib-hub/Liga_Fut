@@ -153,43 +153,52 @@ function FixturePage() {
           </div>
         </div> {/* Fin de la Columna Izquierda (Contenido) */}
 
-        {/* Columna Derecha (Publicidad) */}
-        {/* Ocupa 2 de 12 columnas en pantallas grandes */}
-        {/* Copiamos la estructura exacta de GoleadoresPage */}
-        <div className="lg:col-span-2 space-y-8 flex flex-col items-center mt-8 lg:mt-0"> {/* Añadido margen superior en móvil */}
-           {/* --- Anuncio 1 --- */}
-           <div className="w-full max-w-sm"> {/* Mantenemos el max-w para controlar tamaño */}
+       {/* Columna Derecha (Publicidad) */}
+        {/* --- MODIFICADO AQUÍ --- */}
+        {/* Por defecto (móvil): grid de 2 columnas con gap */}
+        {/* En lg: se convierte en columna de 2/12, flex vertical con space-y */}
+        <div className="grid grid-cols-2 gap-4 items-start mt-8 lg:col-span-2 lg:flex lg:flex-col lg:space-y-8 lg:mt-0">
+
+           {/* Anuncio 1 */}
+           {/* Ya no necesita w-full o max-w-sm explícito para móvil (grid lo maneja) */}
+           {/* Mantenemos w-full para lg (para que ocupe el ancho de la columna flex) */}
+           <div className="lg:w-full">
              <EspacioPublicidad
-                imagenSrc="/imagenes/imagen_01.jpg" // ¡Verifica esta ruta!
+                imagenSrc="/imagenes/imagen_01.jpg" // ¡Verifica ruta!
                 altPublicidad="Anuncio de Ejemplo 1"
               />
            </div>
-            {/* --- Anuncio 2 --- */}
-           <div className="w-full max-w-sm">
+
+           {/* Anuncio 2 */}
+           <div className="lg:w-full">
               <EspacioPublicidad
-                imagenSrc="/imagenes/imagen_02.jpg" // ¡Verifica esta ruta!
+                imagenSrc="/imagenes/imagen_02.jpg" // ¡Verifica ruta!
                 altPublicidad="Anuncio de Ejemplo 2"
               />
            </div>
-            {/* --- Anuncio 3 --- */}
-           <div className="w-full max-w-sm">
+
+           {/* Anuncio 3 */}
+           <div className="lg:w-full">
               <EspacioPublicidad
-                imagenSrc="/imagenes/imagen_03.jpg" // ¡Verifica esta ruta!
+                imagenSrc="/imagenes/imagen_03.jpg" // ¡Verifica ruta!
                 altPublicidad="Anuncio de Ejemplo 3"
               />
            </div>
-           {/* --- Anuncio 4 --- */}
-           <div className="w-full max-w-sm">
+
+           {/* Anuncio 4 */}
+           <div className="lg:w-full">
                <EspacioPublicidad
-                imagenSrc="/imagenes/imagen_04.jpg" // ¡Verifica esta ruta!
+                imagenSrc="/imagenes/imagen_04.jpg" // ¡Verifica ruta!
                 altPublicidad="Anuncio de Ejemplo 4"
               />
            </div>
-        </div> {/* Fin de la Columna Derecha (Publicidad) */}
+           {/* Puedes añadir más anuncios si es necesario */}
 
-      </div> {/* Fin del Nuevo Contenedor Grid (10/2) */}
+        </div> {/* Fin Columna Derecha (Publicidad) */}
 
-    </div> // Fin del contenedor principal
+      </div> {/* Fin Contenedor Grid Principal */}
+
+    </div> // Fin contenedor principal
   );
 }
 

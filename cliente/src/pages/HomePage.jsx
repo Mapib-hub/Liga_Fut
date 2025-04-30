@@ -135,54 +135,61 @@ function HomePage() {
 
         </div>
       </div>
-      {/* --- Sección de Publicidad Inferior --- */}
-    {/* Contenedor con padding */}
+      
+    {/* --- Sección de Publicidad Inferior --- */}
     <div className="container mx-auto px-4 pb-12">
-      {/* Aplicamos grid de 12 columnas en 'lg', con espacio */}
-      {/* Usamos 'items-start' para alinear los elementos al inicio de su celda si tienen diferente altura */}
-      <div className='lg:grid lg:grid-cols-12 lg:gap-4 items-start'> {/* Cambiado a 12 columnas en lg */}
+    {/* --- MODIFICADO AQUÍ --- */}
+    {/* Aplicamos grid y 2 columnas POR DEFECTO (móvil) */}
+    {/* Luego, en 'lg', cambiamos a 12 columnas */}
+    {/* Añadimos un gap para móvil y mantenemos el de lg */}
+    <div className='grid grid-cols-2 gap-4 lg:grid-cols-12 lg:gap-4 items-start'>
 
-        {/* Anuncio 1: Ocupa 2 de 12 columnas en 'lg' */}
-        <div className="lg:col-span-2 mb-4 lg:mb-0"> {/* Añadido div contenedor y col-span */}
-          <EspacioPublicidad
-            imagenSrc="/imagenes/imagen_01.jpg" // ¡Verifica ruta!
-            altPublicidad="Anuncio de Ejemplo 1"
-          />
-        </div>
-        {/* Espacio vacío 1: Ocupa 1 de 12 columnas en 'lg', oculto en móvil */}
-        <div className="hidden lg:block lg:col-span-1"></div> {/* <--- ESPACIO VACÍO */}
+      {/* Anuncio 1: Ocupa 1 celda en móvil (automático), 2 en lg */}
+      {/* --- MODIFICADO: Removido mb-4, ya que gap-4 lo maneja --- */}
+      <div className="lg:col-span-2 lg:mb-0">
+        <EspacioPublicidad
+          imagenSrc="/imagenes/imagen_01.jpg" // ¡Verifica ruta!
+          altPublicidad="Anuncio de Ejemplo 1"
+        />
+      </div>
+      {/* Espacio vacío 1: Sigue oculto en móvil */}
+      <div className="hidden lg:block lg:col-span-1"></div> {/* <--- ESPACIO VACÍO */}
 
-        {/* Anuncio 2: Ocupa 2 de 12 columnas en 'lg' */}
-        <div className="lg:col-span-2 mb-4 lg:mb-0"> {/* Añadido div contenedor y col-span */}
-          <EspacioPublicidad
-            imagenSrc="/imagenes/imagen_02.jpg" // ¡Verifica ruta!
-            altPublicidad="Anuncio de Ejemplo 2"
-          />
-        </div>
-        {/* Espacio vacío 2: Ocupa 1 de 12 columnas en 'lg', oculto en móvil */}
-        <div className="hidden lg:block lg:col-span-1"></div> {/* <--- ESPACIO VACÍO */}
+      {/* Anuncio 2: Ocupa 1 celda en móvil (automático), 2 en lg */}
+      {/* --- MODIFICADO: Removido mb-4 --- */}
+      <div className="lg:col-span-2 lg:mb-0">
+        <EspacioPublicidad
+          imagenSrc="/imagenes/imagen_02.jpg" // ¡Verifica ruta!
+          altPublicidad="Anuncio de Ejemplo 2"
+        />
+      </div>
+      {/* Espacio vacío 2: Sigue oculto en móvil */}
+      <div className="hidden lg:block lg:col-span-1"></div> {/* <--- ESPACIO VACÍO */}
 
-        {/* Anuncio 3: Ocupa 2 de 12 columnas en 'lg' */}
-        <div className="lg:col-span-2 mb-4 lg:mb-0"> {/* Añadido div contenedor y col-span */}
-          <EspacioPublicidad
-            imagenSrc="/imagenes/imagen_03.jpg" // ¡Verifica ruta!
-            altPublicidad="Anuncio de Ejemplo 3"
-          />
-        </div>
-        {/* Espacio vacío 3: Ocupa 1 de 12 columnas en 'lg', oculto en móvil */}
-        <div className="hidden lg:block lg:col-span-1"></div> {/* <--- ESPACIO VACÍO */}
+      {/* Anuncio 3: Ocupa 1 celda en móvil (automático), 2 en lg */}
+      {/* --- MODIFICADO: Removido mb-4 --- */}
+      <div className="lg:col-span-2 lg:mb-0">
+        <EspacioPublicidad
+          imagenSrc="/imagenes/imagen_03.jpg" // ¡Verifica ruta!
+          altPublicidad="Anuncio de Ejemplo 3"
+        />
+      </div>
+      {/* Espacio vacío 3: Sigue oculto en móvil */}
+      <div className="hidden lg:block lg:col-span-1"></div> {/* <--- ESPACIO VACÍO */}
 
-        {/* Anuncio 4: Ocupa 2 de 12 columnas en 'lg' */}
-        <div className="lg:col-span-2 mb-4 lg:mb-0"> {/* Añadido div contenedor y col-span */}
-          <EspacioPublicidad
-            imagenSrc="/imagenes/imagen_04.jpg" // ¡Verifica ruta!
-            altPublicidad="Anuncio de Ejemplo 4"
-          />
-        </div>
-        {/* Espacio vacío 4: Ocupa 1 de 12 columnas en 'lg', oculto en móvil */}
-        <div className="hidden lg:block lg:col-span-1"></div> {/* <--- ESPACIO VACÍO */}
+      {/* Anuncio 4: Ocupa 1 celda en móvil (automático), 2 en lg */}
+      {/* --- MODIFICADO: Removido mb-4 --- */}
+      <div className="lg:col-span-2 lg:mb-0">
+        <EspacioPublicidad
+          imagenSrc="/imagenes/imagen_04.jpg" // ¡Verifica ruta!
+          altPublicidad="Anuncio de Ejemplo 4"
+        />
+      </div>
+      {/* Espacio vacío 4: Sigue oculto en móvil */}
+      {/* Considera si necesitas este último espacio en lg */}
+      <div className="hidden lg:block lg:col-span-1"></div> {/* <--- ESPACIO VACÍO */}
 
-      </div> {/* Cierre del grid lg:grid-cols-12 */}
+    </div> {/* Cierre del grid */}
     </div>
     </div>
   );
