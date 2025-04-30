@@ -15,6 +15,32 @@ body{
 .equipo-fila {
   transition: background-color 0.2s ease-in-out;
 }
+/* Estilos para el contenedor del espacio promocional */
+.promo-espacio {
+  margin: 1rem auto; /* Añade un margen arriba/abajo y centra horizontalmente si el contenedor padre lo permite */
+  padding: 0;      /* Sin relleno interno por defecto */
+  text-align: center; /* Centra la imagen si es más pequeña que el contenedor */
+  max-width: 728px; /* Opcional: Limita el ancho máximo al de tu imagen más ancha si quieres */
+}
+
+/* Estilos para la imagen promocional */
+.promo-imagen {
+  max-width: 100%; /* La imagen nunca será más ancha que su contenedor */
+  height: auto;    /* La altura se ajusta automáticamente para mantener la proporción */
+  display: block;  /* Evita espacios extra debajo de la imagen y permite que el margen 'auto' funcione */
+  margin-left: auto; /* Ayuda a centrar la imagen dentro del div */
+  margin-right: auto;/* Ayuda a centrar la imagen dentro del div */
+}
+
+/* --- Media Query Opcional para Móviles --- */
+/* Si quieres ocultar el anuncio en pantallas muy pequeñas (ej. menos de 480px) */
+/* @media (max-width: 479px) {
+  .promo-espacio {
+    display: none;
+  }
+} */
+
+
 @media screen and (max-width: 1180px) {
   .elim1000{
     display: none;

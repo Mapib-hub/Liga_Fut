@@ -13,6 +13,7 @@ import NoticiasListPage from './pages/NoticiasListPage';
 import NoticiaDetallePage from './pages/NoticiaDetallePage';
 import FixturePage from './pages/FixturePage'; 
 import NotFoundPage from './pages/NotFoundPage';
+import GaleriaPage from './pages/GaleriaPage';
 
 import LoginPage from "./pages/LoginPage";
 import ImagenPage from "./pages/ImagenPage"; // ¿Es pública o admin? La dejo aquí por ahora.
@@ -76,6 +77,7 @@ function App() {
                       <Route path="/web/noticias" element={<NoticiasListPage />} />
                       <Route path="/web/noticias/:id" element={<NoticiaDetallePage />} />
                       <Route path="/web/fixture" element={<FixturePage />} />
+                      <Route path="/web/galeria" element={<GaleriaPage />} />
                       
                       <Route path="/imagenes" element={<ImagenPage />} />
                       <Route path="/register" element={<RegisterPage />} />

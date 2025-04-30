@@ -24,7 +24,8 @@
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1",
     "sweetalert": "^2.1.2",
-    "sweetalert2": "^11.19.1"
+    "sweetalert2": "^11.19.1",
+    "yet-another-react-lightbox": "^3.23.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

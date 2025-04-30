@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiHome, FiList, FiRss, FiUsers, FiCalendar, FiLogIn, FiMenu, FiX, FiAward } from 'react-icons/fi';
+import { FiHome, FiList, FiRss, FiUsers, FiCalendar, FiImage, FiLogIn, FiMenu, FiX, FiAward } from 'react-icons/fi';
 
 const navItems = [
   { to: "/", icon: FiHome, text: "Inicio" },
@@ -11,6 +11,7 @@ const navItems = [
   { to: "/web/noticias", icon: FiRss, text: "Noticias" },
   { to: "/web/equipos", icon: FiUsers, text: "Equipos" },
   { to: "/web/goleadores", icon: FiAward, text: "Goleadores" },
+  { to: "/web/galeria", icon: FiImage, text: "Galeria" },
   { to: "/login", icon: FiLogIn, text: "Login" },
 ];
 
