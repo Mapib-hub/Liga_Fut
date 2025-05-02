@@ -33,7 +33,7 @@ services:
         VITE_BACKEND_IMAGE_ORIGIN_ARG: ""
         # --- FIN CORRECCIÓN ---
     ports:
-      - "8081:80"
+      - "8090:80"
     depends_on:
       - servidor
     networks:
