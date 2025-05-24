@@ -96,50 +96,45 @@ function FixturePage() {
                     <p className="p-4 text-sm text-gray-500 italic">No hay partidos programados para esta fecha.</p>
                   ) : (
                     fecha.partidos.map((partido) => (
-                      // Contenedor principal del partido:
-                      // Móvil: se apilan verticalmente (flex-col)
-                      // Desktop (md): se ponen en fila (md:flex-row) y se estiran para igualar altura (md:items-stretch)
-                      <div key={partido._id} className="p-3 md:p-4 hover:bg-gray-50 transition-colors duration-150 flex flex-col md:flex-row md:items-stretch">
+                      // Contenedor principal del partido: SIEMPRE en fila, items-center para alinear verticalmente
+                      <div key={partido._id} className="p-2 md:p-3 hover:bg-gray-50 transition-colors duration-150 flex flex-row items-center">
 
-                        {/* Equipo Local */}
-                        {/* Móvil: se centra el contenido. Desktop: contenido a la derecha. */}
-                        <div className="w-full md:w-2/5 flex flex-col items-center justify-center md:items-end md:justify-center p-2 text-center md:text-right mb-2 md:mb-0">
+                        {/* Columna Equipo Local (40%) */}
+                        <div className="w-[40%] flex flex-col items-center justify-center text-center px-1">
                           <Link
                             to={`/web/equipos/${partido.equipo_local?._id}`}
-                            className="text-sm md:text-base font-semibold text-gray-800 hover:text-blue-600 break-words w-full" // break-words para nombres largos
+                            className="text-xs sm:text-sm font-medium text-gray-800 hover:text-blue-600 break-words w-full"
                           >
                             {partido.equipo_local?.nombre || 'Local'}
                           </Link>
-                          <div className="mt-1 md:mt-2"> {/* Espacio entre nombre e insignia */}
+                          <div className="mt-1">
                             {renderInsignia(partido.equipo_local)}
                           </div>
                         </div>
 
-                        {/* Marcador o VS - Columna Central (20% en desktop) */}
-                        {/* Móvil: se centra. Desktop: se centra vertical y horizontalmente. */}
-                        <div className="w-full md:w-1/5 flex flex-col items-center justify-center text-center p-2 mb-2 md:mb-0">
+                        {/* Columna Marcador/VS (20%) */}
+                        <div className="w-[20%] flex flex-col items-center justify-center text-center px-1">
                           {partido.estado === 'Finalizado' ? (
-                            <span className="text-base md:text-lg font-bold text-gray-800">
+                            <span className="text-sm sm:text-base font-bold text-gray-800">
                               {partido.marcador_local ?? '-'} : {partido.marcador_visitante ?? '-'}
                             </span>
                           ) : (
-                            <span className="text-sm md:text-base text-gray-500 uppercase font-semibold">vs</span>
+                            <span className="text-xs sm:text-sm text-gray-500 uppercase font-semibold">vs</span>
                           )}
                            {partido.estado !== 'Finalizado' && (
-                             <span className="block text-xs text-gray-400 mt-1 capitalize">{partido.estado || 'Pendiente'}</span>
+                             <span className="block text-[10px] sm:text-xs text-gray-400 mt-0.5 capitalize">{partido.estado || 'Pendiente'}</span>
                            )}
                         </div>
 
-                        {/* Equipo Visitante */}
-                        {/* Móvil: se centra el contenido. Desktop: contenido a la izquierda. */}
-                        <div className="w-full md:w-2/5 flex flex-col items-center justify-center md:items-start md:justify-center p-2 text-center md:text-left">
+                        {/* Columna Equipo Visitante (40%) */}
+                        <div className="w-[40%] flex flex-col items-center justify-center text-center px-1">
                            <Link
                             to={`/web/equipos/${partido.equipo_visitante?._id}`}
-                            className="text-sm md:text-base font-semibold text-gray-800 hover:text-blue-600 break-words w-full" // break-words para nombres largos
+                            className="text-xs sm:text-sm font-medium text-gray-800 hover:text-blue-600 break-words w-full"
                           >
                             {partido.equipo_visitante?.nombre || 'Visitante'}
                           </Link>
-                          <div className="mt-1 md:mt-2"> {/* Espacio entre nombre e insignia */}
+                          <div className="mt-1">
                             {renderInsignia(partido.equipo_visitante)}
                           </div>
                         </div>
