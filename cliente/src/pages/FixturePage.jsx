@@ -118,7 +118,7 @@ function FixturePage() {
                     fecha.partidos.map((partido) => (
                       <div key={partido._id} className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors duration-150">
                         {/* Equipo Local */}
-                        <div className="flex-1 flex items-center justify-end space-x-2 md:space-x-4 text-right">
+                        <div className="flex-1 w-3 flex items-center justify-end space-x-2 md:space-x-4 text-right">
                           <Link to={`/web/equipos/${partido.equipo_local?._id}`} className="text-sm md:text-base font-medium text-gray-800 hover:text-blue-600 truncate">
                             {partido.equipo_local?.nombre || 'Local'}
                           </Link>
