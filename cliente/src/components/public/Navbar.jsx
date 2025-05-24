@@ -83,6 +83,28 @@ function ExperimentalNavbar() {
           >
             {navItems.map((item, index) => {
               const isActive = location.pathname === item.to;
+              // Si el item es el de Login, renderizar como <a> para abrir en nueva pestaña
+              if (item.to === "/login") {
+                return (
+                  <motion.div key={index} variants={itemVariants}>
+                    <a
+                      href={item.to} // Usar href para la etiqueta <a>
+                      target="_blank" // Abrir en una nueva pestaña
+                      rel="noopener noreferrer" // Buena práctica de seguridad
+                      onClick={() => setIsOpen(false)} // Cerrar el menú al hacer clic
+                      className={`flex items-center justify-end space-x-3 px-4 py-2 rounded-full transition-all duration-200 ease-in-out ${
+                        isActive // La lógica de isActive puede o no ser relevante aquí, pero la mantenemos por consistencia de estilo
+                          ? 'bg-white text-indigo-700 shadow-md scale-105'
+                          : 'bg-indigo-800/80 text-white hover:bg-indigo-700 hover:scale-105 hover:shadow-lg backdrop-blur-sm'
+                      }`}
+                    >
+                      <span className="text-sm font-medium">{item.text}</span>
+                      <item.icon size={18} />
+                    </a>
+                  </motion.div>
+                );
+              }
+              // Para todos los demás items, usar Link para navegación interna
               return (
                 <motion.div key={index} variants={itemVariants}>
                   <Link
