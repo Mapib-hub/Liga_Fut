@@ -137,8 +137,8 @@ function FixturePage() {
                           <div className="w-full sm:w-auto text-center py-1 sm:py-0 sm:order-2">
                           {partido.estado === 'Finalizado' ? (
                               <span className="text-base md:text-lg font-bold text-gray-800">
-                              {partido.marcador_local ?? '-'} : {partido.marcador_visitante ?? '-'}
-                            </span>
+                                {partido.marcador_local ?? '-'} : {partido.marcador_visitante ?? '-'}
+                              </span>  // Asegúrate de que esta etiqueta esté cerrada
                           ) : (
                             <span className="text-xs text-gray-500 uppercase font-semibold">vs</span>
                           )}
