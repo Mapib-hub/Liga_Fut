@@ -40,7 +40,7 @@ services:
       - app-network
 
   mongo:
-    image: mongo:X.Y # Reemplaza X.Y con la versión más nueva que usaste, ej: mongo:6.0
+    image: mongo:4.4
     volumes:
       - mongo-data:/data/db
     networks:
