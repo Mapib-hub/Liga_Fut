@@ -116,31 +116,52 @@ function FixturePage() {
                     <p className="p-4 text-sm text-gray-500 italic">No hay partidos programados para esta fecha.</p>
                   ) : (
                     fecha.partidos.map((partido) => (
-                      <div key={partido._id} className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors duration-150">
+                      // Contenedor principal del partido: flex-col por defecto, md:flex-row para pantallas medianas y grandes
+                      <div key={partido._id} className="p-3 md:p-4 hover:bg-gray-50 transition-colors duration-150 flex flex-col md:flex-row md:items-center md:justify-between">
+
                         {/* Equipo Local */}
-                        <div className="flex-1 w-3 flex items-center justify-end space-x-2 md:space-x-4 text-right">
-                          <Link to={`/web/equipos/${partido.equipo_local?._id}`} className="text-sm md:text-base font-medium text-gray-800 hover:text-blue-600 truncate">
+                        {/* Móvil: ancho completo, elementos apilados y centrados. MD: 40% ancho, elementos en fila, alineado a la derecha, orden 1 */}
+                        <div className="w-full md:w-2/5 flex flex-col items-center md:flex-row md:justify-end md:text-right mb-3 md:mb-0 md:order-1">
+                          {/* Nombre del equipo: orden 2 en móvil (debajo de insignia), orden 1 en MD (antes de insignia) */}
+                          <Link 
+                            to={`/web/equipos/${partido.equipo_local?._id}`} 
+                            className="text-sm md:text-base font-medium text-gray-800 hover:text-blue-600 break-words order-2 md:order-1 md:mr-2 text-center md:text-right"
+                          >
                             {partido.equipo_local?.nombre || 'Local'}
                           </Link>
-                          {renderInsignia(partido.equipo_local)}
+                          {/* Insignia: orden 1 en móvil (encima de nombre), orden 2 en MD (después de nombre) */}
+                          <div className="order-1 md:order-2 mb-1 md:mb-0">
+                            {renderInsignia(partido.equipo_local)}
+                          </div>
                         </div>
+
                         {/* Marcador o VS */}
-                        <div className="w-16 md:w-24 text-center px-2">
+                        {/* Móvil: ancho completo, centrado. MD: ancho automático, centrado, orden 2 */}
+                        <div className="w-full md:w-auto text-center px-2 mb-3 md:mb-0 md:order-2">
                           {partido.estado === 'Finalizado' ? (
-                            <span className="text-lg md:text-xl font-bold text-gray-800">
+                            <span className="text-base md:text-lg font-bold text-gray-800"> {/* Ajustado tamaño de fuente para consistencia */}
                               {partido.marcador_local ?? '-'} : {partido.marcador_visitante ?? '-'}
                             </span>
                           ) : (
                             <span className="text-xs text-gray-500 uppercase font-semibold">vs</span>
                           )}
                            {partido.estado !== 'Finalizado' && (
-                             <span className="block text-xs text-gray-400 mt-1">{partido.estado || 'Pendiente'}</span>
+                             <span className="block text-xs text-gray-400 mt-1 capitalize">{partido.estado || 'Pendiente'}</span>
                            )}
                         </div>
+
                         {/* Equipo Visitante */}
-                        <div className="flex-1 flex items-center justify-start space-x-2 md:space-x-4 text-left">
-                          {renderInsignia(partido.equipo_visitante)}
-                          <Link to={`/web/equipos/${partido.equipo_visitante?._id}`} className="text-sm md:text-base font-medium text-gray-800 hover:text-blue-600 truncate">
+                        {/* Móvil: ancho completo, elementos apilados y centrados. MD: 40% ancho, elementos en fila, alineado a la izquierda, orden 3 */}
+                        <div className="w-full md:w-2/5 flex flex-col items-center md:flex-row md:justify-start md:text-left md:order-3">
+                          {/* Insignia: orden 1 en móvil y MD (antes de nombre) */}
+                          <div className="order-1 md:order-1 mb-1 md:mb-0 md:mr-2">
+                            {renderInsignia(partido.equipo_visitante)}
+                          </div>
+                          {/* Nombre del equipo: orden 2 en móvil y MD (después de insignia) */}
+                          <Link 
+                            to={`/web/equipos/${partido.equipo_visitante?._id}`} 
+                            className="text-sm md:text-base font-medium text-gray-800 hover:text-blue-600 break-words order-2 md:order-2 text-center md:text-left"
+                          >
                             {partido.equipo_visitante?.nombre || 'Visitante'}
                           </Link>
                         </div>
