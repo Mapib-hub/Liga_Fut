@@ -116,31 +116,43 @@ function FixturePage() {
                     <p className="p-4 text-sm text-gray-500 italic">No hay partidos programados para esta fecha.</p>
                   ) : (
                     fecha.partidos.map((partido) => (
-                      <div key={partido._id} className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors duration-150">
+                      // Contenedor principal del partido, con padding y efecto hover. El borde lo maneja `divide-y` del padre.
+                      <div key={partido._id} className="p-3 md:p-4 hover:bg-gray-50 transition-colors duration-150">
+                        {/* Contenedor flex: se apila en móvil (flex-col), fila en pantallas pequeñas y mayores (sm:flex-row) */}
+                        {/* items-center para alinear verticalmente en modo fila, sm:justify-between para espaciar en modo fila */}
+                        <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-2 sm:gap-3">
+
                         {/* Equipo Local */}
-                        <div className="flex-1 w-3 flex items-center justify-end space-x-2 md:space-x-4 text-right">
-                          <Link to={`/web/equipos/${partido.equipo_local?._id}`} className="text-sm md:text-base font-medium text-gray-800 hover:text-blue-600 truncate">
+                          {/* En móvil: ocupa el ancho, el contenido se alinea a la izquierda. */}
+                          {/* En sm+: toma 2/5 del ancho, el contenido se alinea a la derecha, nombre antes de la insignia. */}
+                          <div className="flex items-center w-full sm:w-2/5 space-x-2 md:space-x-3 justify-start sm:justify-end sm:order-1">
+                            <Link to={`/web/equipos/${partido.equipo_local?._id}`} className="text-sm md:text-base font-medium text-gray-800 hover:text-blue-600 break-words text-left sm:text-right sm:order-1">
                             {partido.equipo_local?.nombre || 'Local'}
                           </Link>
-                          {renderInsignia(partido.equipo_local)}
+                            <div className="flex-shrink-0 sm:order-2">{renderInsignia(partido.equipo_local)}</div> {/* Insignia a la derecha del nombre en sm+ */}
                         </div>
+
                         {/* Marcador o VS */}
-                        <div className="w-16 md:w-24 text-center px-2">
+                          {/* En móvil: ocupa el ancho, centrado. En sm+: ancho automático, centrado. Ordenado entre los equipos. */}
+                          <div className="w-full sm:w-auto text-center py-1 sm:py-0 sm:order-2">
                           {partido.estado === 'Finalizado' ? (
-                            <span className="text-lg md:text-xl font-bold text-gray-800">
+                              <span className="text-base md:text-lg font-bold text-gray-800">
                               {partido.marcador_local ?? '-'} : {partido.marcador_visitante ?? '-'}
                             </span>
                           ) : (
                             <span className="text-xs text-gray-500 uppercase font-semibold">vs</span>
                           )}
                            {partido.estado !== 'Finalizado' && (
-                             <span className="block text-xs text-gray-400 mt-1">{partido.estado || 'Pendiente'}</span>
+                              <span className="block text-xs text-gray-400 mt-1">{partido.estado || 'Pendiente'}</span>
                            )}
                         </div>
+
                         {/* Equipo Visitante */}
-                        <div className="flex-1 flex items-center justify-start space-x-2 md:space-x-4 text-left">
-                          {renderInsignia(partido.equipo_visitante)}
-                          <Link to={`/web/equipos/${partido.equipo_visitante?._id}`} className="text-sm md:text-base font-medium text-gray-800 hover:text-blue-600 truncate">
+                          {/* En móvil: ocupa el ancho, insignia antes del nombre. */}
+                          {/* En sm+: toma 2/5 del ancho, insignia antes del nombre. */}
+                          <div className="flex items-center w-full sm:w-2/5 space-x-2 md:space-x-3 justify-start sm:order-3">
+                            <div className="flex-shrink-0">{renderInsignia(partido.equipo_visitante)}</div> {/* Insignia a la izquierda del nombre */}
+                            <Link to={`/web/equipos/${partido.equipo_visitante?._id}`} className="text-sm md:text-base font-medium text-gray-800 hover:text-blue-600 break-words text-left">
                             {partido.equipo_visitante?.nombre || 'Visitante'}
                           </Link>
                         </div>
