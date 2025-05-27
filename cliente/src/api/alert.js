@@ -1,4 +1,3 @@
-// src/api/adminroutes.js
 import axiosApiInstance from './axios'; // Instancia para rutas /api (protegidas), baseURL es VITE_API_BASE_URL (ej: http://.../api)
 import publicAxiosInstance from './public'; // Instancia para rutas /public, baseURL es backendRootUrl/public (ej: http://.../public)
 

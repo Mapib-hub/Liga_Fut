@@ -1,3 +1,4 @@
+// c:\Users\Acer\Desktop\proyectos\prueba_node\cliente\src\api\public.js
 import axios from "axios";
 // 1. Get the VITE_API_BASE_URL (e.g., http://localhost:4000/api or http://100.107.48.58:8090/api)
 const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
